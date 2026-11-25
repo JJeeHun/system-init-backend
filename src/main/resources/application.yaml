@@ -1,3 +1,6 @@
 spring:
   application:
     name: system-init-backend
+
+server:
+  port: 8081
