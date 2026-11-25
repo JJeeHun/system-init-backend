@@ -7,7 +7,7 @@ data class AccountResult(
     val loginId: String,
     val name: String,
     val email: String,
-    val centerCode: String,
+    val centerCode: String?,
     val enabled: Boolean,
 ) {
     companion object {

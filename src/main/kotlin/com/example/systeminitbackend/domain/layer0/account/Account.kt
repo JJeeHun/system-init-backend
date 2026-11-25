@@ -13,7 +13,7 @@ class Account private constructor(
     password: String,
     name: String,
     email: String,
-    centerCode: String,
+    centerCode: String?,
     enabled: Boolean,
 ) : BaseEntity() {
 
@@ -37,13 +37,18 @@ class Account private constructor(
     var email: String = email
         protected set
 
-    @Column(nullable = false, length = 50)
-    var centerCode: String = centerCode
+    @Column(length = 50)
+    var centerCode: String? = centerCode
         protected set
 
     @Column(nullable = false)
     var enabled: Boolean = enabled
         protected set
+
+    init {
+        require(loginId.isNotBlank()) { "로그인 ID는 필수입니다." }
+        validateProfile(name, email, centerCode)
+    }
 
     companion object {
         fun register(
@@ -51,19 +56,34 @@ class Account private constructor(
             rawPassword: String,
             name: String,
             email: String,
-            centerCode: String,
+            centerCode: String?,
             enabled: Boolean,
             passwordEncoder: PasswordEncoder,
-        ): Account = Account(loginId, passwordEncoder.encode(rawPassword), name, email, centerCode, enabled)
+        ): Account {
+            validateRawPassword(rawPassword)
+            return Account(loginId, passwordEncoder.encode(rawPassword), name, email, centerCode, enabled)
+        }
+
+        private fun validateRawPassword(rawPassword: String) {
+            require(rawPassword.isNotBlank()) { "비밀번호는 필수입니다." }
+        }
+
+        private fun validateProfile(name: String, email: String, centerCode: String?) {
+            require(name.isNotBlank()) { "이름은 필수입니다." }
+            require(email.isNotBlank()) { "이메일은 필수입니다." }
+            require(centerCode == null || centerCode.isNotBlank()) { "센터 코드는 빈 값일 수 없습니다." }
+        }
     }
 
-    fun updateProfile(name: String, email: String, centerCode: String) {
+    fun updateProfile(name: String, email: String, centerCode: String?) {
+        validateProfile(name, email, centerCode)
         this.name = name
         this.email = email
         this.centerCode = centerCode
     }
 
     fun changePassword(rawPassword: String, passwordEncoder: PasswordEncoder) {
+        validateRawPassword(rawPassword)
         this.password = passwordEncoder.encode(rawPassword)
     }
 

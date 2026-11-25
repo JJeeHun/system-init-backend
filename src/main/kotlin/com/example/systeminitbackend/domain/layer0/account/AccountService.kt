@@ -15,7 +15,7 @@ class AccountService(
         rawPassword: String,
         name: String,
         email: String,
-        centerCode: String,
+        centerCode: String?,
         enabled: Boolean,
     ): Account {
         val account = Account.register(
@@ -37,7 +37,7 @@ class AccountService(
 
     fun count(): Long = accountRepository.countByDeletedFalse()
 
-    fun updateProfile(id: Long, name: String, email: String, centerCode: String): Account {
+    fun updateProfile(id: Long, name: String, email: String, centerCode: String?): Account {
         val account = getById(id)
         account.updateProfile(name, email, centerCode)
         return account

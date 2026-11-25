@@ -48,7 +48,13 @@ class Notification(
     var readAt: LocalDateTime? = null
         protected set
 
+    init {
+        require(title.isNotBlank()) { "알림 제목은 필수입니다." }
+        require(content.isNotBlank()) { "알림 내용은 필수입니다." }
+    }
+
     fun markAsRead() {
+        if (isRead) return
         this.isRead = true
         this.readAt = LocalDateTime.now()
     }

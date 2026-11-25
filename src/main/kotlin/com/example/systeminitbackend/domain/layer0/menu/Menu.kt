@@ -73,6 +73,11 @@ class Menu(
     var enabled: Boolean = enabled
         protected set
 
+    init {
+        require(code.isNotBlank()) { "메뉴 코드는 필수입니다." }
+        validate(name, sortOrder)
+    }
+
     fun update(
         parent: Menu?,
         name: String,
@@ -84,6 +89,8 @@ class Menu(
         scope: MenuScope,
         enabled: Boolean,
     ) {
+        validate(name, sortOrder)
+        validateParent(parent)
         this.parent = parent
         this.name = name
         this.labelKey = labelKey
@@ -93,5 +100,20 @@ class Menu(
         this.sortOrder = sortOrder
         this.scope = scope
         this.enabled = enabled
+    }
+
+    private fun validate(name: String, sortOrder: Int) {
+        require(name.isNotBlank()) { "메뉴 이름은 필수입니다." }
+        require(sortOrder >= 0) { "정렬 순서는 0 이상이어야 합니다." }
+    }
+
+    // 자기 자신이나 하위 메뉴를 상위로 지정하면 트리가 순환한다.
+    private fun validateParent(parent: Menu?) {
+        val selfId = id ?: return
+        var ancestor = parent
+        while (ancestor != null) {
+            require(ancestor.id != selfId) { "자기 자신이나 하위 메뉴를 상위 메뉴로 지정할 수 없습니다." }
+            ancestor = ancestor.parent
+        }
     }
 }

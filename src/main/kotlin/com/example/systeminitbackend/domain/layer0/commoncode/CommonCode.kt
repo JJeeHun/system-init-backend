@@ -52,10 +52,21 @@ class CommonCode(
     var enabled: Boolean = enabled
         protected set
 
+    init {
+        require(code.isNotBlank()) { "코드는 필수입니다." }
+        validate(name, sortOrder)
+    }
+
     fun update(name: String, description: String?, sortOrder: Int, enabled: Boolean) {
+        validate(name, sortOrder)
         this.name = name
         this.description = description
         this.sortOrder = sortOrder
         this.enabled = enabled
+    }
+
+    private fun validate(name: String, sortOrder: Int) {
+        require(name.isNotBlank()) { "이름은 필수입니다." }
+        require(sortOrder >= 0) { "정렬 순서는 0 이상이어야 합니다." }
     }
 }
