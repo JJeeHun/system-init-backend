@@ -1,8 +1,8 @@
 package com.example.systeminitbackend.application.menu
 
-import com.example.systeminitbackend.domain.Menu
-import com.example.systeminitbackend.domain.enums.MenuScope
-import com.example.systeminitbackend.domain.enums.MenuType
+import com.example.systeminitbackend.domain.layer0.menu.Menu
+import com.example.systeminitbackend.domain.layer0.menu.MenuScope
+import com.example.systeminitbackend.domain.layer0.menu.MenuType
 
 data class MenuResult(
     val id: Long,

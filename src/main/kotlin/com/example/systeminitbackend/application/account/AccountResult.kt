@@ -1,6 +1,6 @@
 package com.example.systeminitbackend.application.account
 
-import com.example.systeminitbackend.domain.Account
+import com.example.systeminitbackend.domain.layer0.account.Account
 
 data class AccountResult(
     val id: Long,

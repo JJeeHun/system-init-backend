@@ -1,6 +1,6 @@
 package com.example.systeminitbackend.application.accountmenu
 
-import com.example.systeminitbackend.domain.mapping.AccountMenu
+import com.example.systeminitbackend.domain.layer1.accountmenu.AccountMenu
 
 data class AccountMenuResult(
     val id: Long,

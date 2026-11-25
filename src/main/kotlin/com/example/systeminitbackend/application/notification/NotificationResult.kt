@@ -1,6 +1,6 @@
 package com.example.systeminitbackend.application.notification
 
-import com.example.systeminitbackend.domain.Notification
+import com.example.systeminitbackend.domain.layer1.notification.Notification
 import java.time.LocalDateTime
 
 data class NotificationResult(

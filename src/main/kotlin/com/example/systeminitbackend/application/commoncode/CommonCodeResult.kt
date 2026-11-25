@@ -1,7 +1,7 @@
 package com.example.systeminitbackend.application.commoncode
 
-import com.example.systeminitbackend.domain.CommonCode
-import com.example.systeminitbackend.domain.CommonCodeGroup
+import com.example.systeminitbackend.domain.layer0.commoncode.CommonCode
+import com.example.systeminitbackend.domain.layer0.commoncode.CommonCodeGroup
 
 data class CommonCodeGroupResult(
     val id: Long,

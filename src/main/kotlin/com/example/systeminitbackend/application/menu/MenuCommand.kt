@@ -1,7 +1,7 @@
 package com.example.systeminitbackend.application.menu
 
-import com.example.systeminitbackend.domain.enums.MenuScope
-import com.example.systeminitbackend.domain.enums.MenuType
+import com.example.systeminitbackend.domain.layer0.menu.MenuScope
+import com.example.systeminitbackend.domain.layer0.menu.MenuType
 
 data class CreateMenuCommand(
     val parentId: Long?,
